@@ -1,11 +1,20 @@
+-- global note
+local global_note = require("global-note")
+global_note.setup()
+
+vim.keymap.set("n", "<leader>nn", global_note.toggle_note, {
+  desc = "Toggle global note",
+})
+
 -- TODO: replace <leader> to <Leader> everywhere in AstroNvim v4 to match vimdoc
 local utils = require "astronvim.utils"
 local get_icon = utils.get_icon
 local is_available = utils.is_available
 local ui = require "astronvim.utils.ui"
-
 local maps = require("astronvim.utils").empty_map_table()
 
+
+--
 local sections = {
   f = { desc = get_icon("Search", 1, true) .. "Find" },
   p = { desc = get_icon("Package", 1, true) .. "Packages" },
@@ -21,6 +30,7 @@ local sections = {
 
 -- Normal --
 -- Standard Operations
+--
 maps.n["j"] = { "v:count == 0 ? 'gj' : 'j'", expr = true, desc = "Move cursor down" }
 maps.n["k"] = { "v:count == 0 ? 'gk' : 'k'", expr = true, desc = "Move cursor up" }
 maps.n["<leader>w"] = { "<cmd>w<cr>", desc = "Save" }
@@ -119,6 +129,8 @@ if is_available "heirline.nvim" then
 end
 
 -- Navigate tabs
+maps.n["H"] = {"0", desc="Go to start of line" }
+maps.n["L"] = {"$", desc="Go to end of line" }
 maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
 maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 
