@@ -1,11 +1,3 @@
--- global note
-local global_note = require("global-note")
-global_note.setup()
-
-vim.keymap.set("n", "<leader>nn", global_note.toggle_note, {
-  desc = "Toggle global note",
-})
-
 -- TODO: replace <leader> to <Leader> everywhere in AstroNvim v4 to match vimdoc
 local utils = require "astronvim.utils"
 local get_icon = utils.get_icon
@@ -51,6 +43,36 @@ maps.n["<leader>ps"] = { function() require("lazy").home() end, desc = "Plugins 
 maps.n["<leader>pS"] = { function() require("lazy").sync() end, desc = "Plugins Sync" }
 maps.n["<leader>pu"] = { function() require("lazy").check() end, desc = "Plugins Check Updates" }
 maps.n["<leader>pU"] = { function() require("lazy").update() end, desc = "Plugins Update" }
+
+-- Note
+maps.n["<leader>nn"] = {function () require("global-note").toggle_note() end, desc = "toogle note"}
+
+
+maps.n["<leader>rp"] = {function () require("SearchReplaceWithinVisualSelection") end, desc = "toggle selection" }
+
+-- vim.api.nvim_set_keymap("v", "<C-r>", "<CMD>SearchReplaceSingleBufferVisualSelection<CR>")
+-- vim.api.nvim_set_keymap("v", "<C-s>", "<CMD>SearchReplaceWithinVisualSelection<CR>")
+-- vim.api.nvim_set_keymap("v", "<C-b>", "<CMD>SearchReplaceWithinVisualSelectionCWord<CR>")
+--
+-- vim.api.nvim_set_keymap("n", "<leader>rs", "<CMD>SearchReplaceSingleBufferSelections<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>ro", "<CMD>SearchReplaceSingleBufferOpen<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>rw", "<CMD>SearchReplaceSingleBufferCWord<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>rW", "<CMD>SearchReplaceSingleBufferCWORD<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>re", "<CMD>SearchReplaceSingleBufferCExpr<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>rf", "<CMD>SearchReplaceSingleBufferCFile<CR>")
+--
+-- vim.api.nvim_set_keymap("n", "<leader>rbs", "<CMD>SearchReplaceMultiBufferSelections<CR>")
+-- vim.api.nvim_set_keymap("n", "<leader>rbo", "<CMD>SearchReplaceMultiBufferOpen<CR>" )
+-- vim.api.nvim_set_keymap("n", "<leader>rbw", "<CMD>SearchReplaceMultiBufferCWord<CR>" )
+-- vim.api.nvim_set_keymap("n", "<leader>rbW", "<CMD>SearchReplaceMultiBufferCWORD<CR>" )
+-- vim.api.nvim_set_keymap("n", "<leader>rbe", "<CMD>SearchReplaceMultiBufferCExpr<CR>" )
+-- vim.api.nvim_set_keymap("n", "<leader>rbf", "<CMD>SearchReplaceMultiBufferCFile<CR>")
+
+-- Go to start / end
+maps.n["H"] = {"0", desc="Go to start of line" }
+maps.n["L"] = {"$", desc="Go to end of line" }
+maps.v["H"] = {"0", desc="Go to start of line" }
+maps.v["L"] = {"$", desc="Go to end of line" }
 
 -- AstroNvim
 maps.n["<leader>pa"] = { "<cmd>AstroUpdatePackages<cr>", desc = "Update Plugins and Mason Packages" }
@@ -129,8 +151,6 @@ if is_available "heirline.nvim" then
 end
 
 -- Navigate tabs
-maps.n["H"] = {"0", desc="Go to start of line" }
-maps.n["L"] = {"$", desc="Go to end of line" }
 maps.n["]t"] = { function() vim.cmd.tabnext() end, desc = "Next tab" }
 maps.n["[t"] = { function() vim.cmd.tabprevious() end, desc = "Previous tab" }
 
