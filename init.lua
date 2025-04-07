@@ -25,6 +25,12 @@ require('packer').startup(function(use)
   use 'styled-components/vim-styled-components' -- Styled Components support
   use 'nvim-tree/nvim-web-devicons'        -- Иконки для barbar.nvim
 
+  -- Theme 
+  use 'stevearc/dressing.nvim' -- Улучшение UI элементов
+  use 'lewis6991/gitsigns.nvim' -- Значки гита
+  use 'sainnhe/everforest'
+  use 'xiyaowong/transparent.nvim' -- Прозрачность
+
   -- LSP ecosystem
   use 'williamboman/mason.nvim'            -- LSP manager
   use 'williamboman/mason-lspconfig.nvim'  -- Mason-LSP bridge
@@ -145,7 +151,20 @@ require('nvim-tree').setup({
     side = "left",
   },
   renderer = {
+    highlight_git = true,
+    highlight_opened_files = 'name',
+    indent_markers = {
+      enable = true,
+      icons = {
+        corner = '└ ',
+        edge = '│ ',
+        item = '│ ',
+        none = '  ',
+      },
+    },
     icons = {
+      webdev_colors = false,
+      git_placement = 'after',
       show = {
         git = true,
         folder = true,
@@ -164,6 +183,8 @@ require('barbar').setup({
       custom_colors = false,
     },
   },
+  highlight_visible = false,
+  highlight_inactive_file_icons = false,
   auto_hide = false
 })
 
@@ -172,6 +193,119 @@ require('diffview').setup({ enhanced_diff_hl = true })
 
 -- use System buffer
 vim.opt.clipboard:append({ "unnamed" })   -- для macOS
+-- Гибридные номера (абсолютный для текущей строки + относительные для остальных)
+vim.opt.number = true
+vim.opt.relativenumber = true
+
+
+-- ========================================================================== --
+--                                 Theme                                      --
+-- ========================================================================== --
+
+vim.g.everforest_background = 'hard'      -- Максимальная контрастность
+vim.g.everforest_enable_italic = 1       -- Курсив для комментариев
+vim.g.everforest_transparent_background = 2 -- Полупрозрачный фон
+vim.g.everforest_diagnostic_virtual_text = 'colored' -- Цветной текст диагностики
+
+-- Применить тему
+vim.cmd[[
+  colorscheme everforest
+  highlight Normal guibg=#2b3339
+  highlight WinSeparator guifg=#543c2c
+  highlight CursorLine guibg=#364247
+  highlight WinSeparator guifg=#6272A4 guibg=NONE
+  highlight CursorLine guibg=#343746
+  highlight Folded guibg=#343746 guifg=#6272A4
+  highlight MatchParen guibg=#44475a gui=bold
+  highlight NvimTreeFolderIcon guifg=#8BE9FD
+  highlight NvimTreeIndentMarker guifg=#6272A4
+  highlight TelescopeTitle guifg=#BD93F9
+  highlight TelescopeSelection guibg=#343746
+  highlight BufferCurrent guibg=#343746
+  highlight BufferInactive guifg=#6272A4
+  highlight LspFloatWinNormal guibg=NONE
+]]
+
+-- Настройка прозрачности
+require('transparent').setup({
+  groups = {
+    'Normal', 'NormalNC', 'Comment', 'Constant', 'Special',
+    'Identifier', 'Statement', 'PreProc', 'Type', 'Underlined',
+    'Todo', 'String', 'Function', 'Conditional', 'Repeat',
+    'Operator', 'Structure', 'LineNr', 'NonText', 'SignColumn',
+    'CursorLineNr', 'EndOfBuffer', 'NvimTreeNormal', 'NvimTreeEndOfBuffer',
+    'TelescopeBorder', 'TelescopePromptBorder', 'TelescopeResultsBorder',
+    'TelescopePreviewBorder', 'TelescopeNormal', 'TelescopePromptNormal',
+    'TelescopePreviewNormal', 'TelescopeSelection', 'TelescopeTitle',
+    'WhichKeyFloat', 'NotifyBackground', 'FloatBorder', 'WinSeparator',
+    'BufferCurrent', 'BufferVisible', 'BufferInactive', 'TabLine',
+    'TabLineFill', 'TabLineSel', 'StatusLine', 'StatusLineNC',
+  },
+  extra_groups = {
+    'GitSignsAdd',
+    'GitSignsChange',
+    'GitSignsDelete',
+    'DiagnosticError',
+    'DiagnosticWarn',
+    'DiagnosticInfo',
+    'DiagnosticHint',
+  },
+})
+
+-- Дополнительные настройки внешнего вида
+vim.opt.termguicolors = true  -- Включить true-цвета
+vim.opt.winblend = 20         -- Прозрачность плавающих окон
+vim.opt.pumblend = 20         -- Прозрачность автодополнения
+
+-- Дополнительные кастомные настройки
+vim.cmd[[
+  " Глобальные настройки
+  highlight WinSeparator guifg=#6272A4 guibg=NONE
+  highlight CursorLine guibg=#343746
+  highlight Folded guibg=#343746 guifg=#6272A4
+  highlight MatchParen guibg=#44475a gui=bold
+  
+  " Настройки для плагинов
+  highlight NvimTreeFolderIcon guifg=#8BE9FD
+  highlight NvimTreeIndentMarker guifg=#6272A4
+  highlight TelescopeTitle guifg=#BD93F9
+  highlight TelescopeSelection guibg=#343746
+  highlight BufferCurrent guibg=#343746
+  highlight BufferInactive guifg=#6272A4
+  highlight LspFloatWinNormal guibg=NONE
+]]
+
+-- Настройка компонентов интерфейса
+require('gitsigns').setup({
+  signs = {
+    add = { text = '+' },
+    change = { text = '~' },
+    delete = { text = '_' },
+    topdelete = { text = '‾' },
+    changedelete = { text = '~' },
+  },
+  sign_priority = 9,
+  current_line_blame = true,
+})
+
+require('dressing').setup({
+  input = {
+    relative = 'cursor',
+    border = 'rounded',
+    win_options = {
+      winblend = 20,
+    },
+  },
+  select = {
+    backend = { 'telescope', 'builtin' },
+    builtin = {
+      win_options = {
+        winblend = 20,
+      },
+    },
+  },
+})
+
 
 -- ========================================================================== --
 --                                 Keymaps                                   --

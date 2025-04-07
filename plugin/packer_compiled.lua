@@ -89,6 +89,21 @@ _G.packer_plugins = {
     path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/diffview.nvim",
     url = "https://github.com/sindrets/diffview.nvim"
   },
+  ["dressing.nvim"] = {
+    loaded = true,
+    path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/dressing.nvim",
+    url = "https://github.com/stevearc/dressing.nvim"
+  },
+  everforest = {
+    loaded = true,
+    path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/everforest",
+    url = "https://github.com/sainnhe/everforest"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
     path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/mason-lspconfig.nvim",
@@ -148,6 +163,11 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
+  },
+  ["transparent.nvim"] = {
+    loaded = true,
+    path = "/Users/ellckid/.local/share/nvim/site/pack/packer/start/transparent.nvim",
+    url = "https://github.com/xiyaowong/transparent.nvim"
   },
   ["vim-styled-components"] = {
     loaded = true,
