@@ -19,6 +19,12 @@ return {
         },
       },
     }
+    vim.api.nvim_create_autocmd("VimEnter", {
+      callback = function()
+        vim.cmd "Neotree left show"
+      end,
+    })
+
     require("neo-tree").setup {
       close_if_last_window = false,
       window = {
