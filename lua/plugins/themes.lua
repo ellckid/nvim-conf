@@ -1,13 +1,14 @@
 -- midnight
 
--- return {
---   "dasupradyumna/midnight.nvim",
---   priority = 1000,
---   lazy = false,
---   config = function()
---     vim.cmd.colorscheme "midnight"
---   end,
---}
+return {
+  "dasupradyumna/midnight.nvim",
+  priority = 1000,
+  lazy = false,
+  config = function()
+    vim.cmd.colorscheme "habamax"
+    -- vim.cmd.colorscheme "midnight"
+  end,
+}
 
 -- pink-moon
 
@@ -52,16 +53,15 @@
 --     vim.cmd.colorscheme "paper"
 --   end,
 -- }
---
 
-return {
-  "junegunn/seoul256.vim",
-  priority = 1000,
-  lazy = false,
-  config = function()
-    vim.cmd.colorscheme "seoul256"
-  end,
-}
+-- return {
+--   "junegunn/seoul256.vim",
+--   priority = 1000,
+--   lazy = false,
+--   config = function()
+--     vim.cmd.colorscheme "seoul256"
+--   end,
+-- }
 
 -- return {
 --   "rebelot/kanagawa.nvim",
