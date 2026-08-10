@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # Project gitignore
 .luarc.json
 after
@@ -47,3 +48,19 @@ tags
 
 # JetBrains
 .idea
+=======
+plugin
+custom
+spell
+ftplugin
+syntax
+coc-settings.json
+.luarc.json
+lazy-lock.json
+after
+>>>>>>> 1aa871d (chore: astro nvim)
+
+# IDE / local
+.idea/
+.claude/
+.claude
