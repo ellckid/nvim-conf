@@ -1,12 +1,11 @@
+-- Treesitter: грамматики.
+---@type LazySpec
 return {
-  {
-    "nvim-treesitter/nvim-treesitter",
-    build = ":TSUpdate",
-    event = { "BufReadPre", "BufNewFile" },
-    opts = {
-      ensure_installed = { "lua", "typescript", "javascript", "tsx", "json" },
-      highlight = { enable = true },
-      indent = { enable = true },
-    },
-  },
+  "nvim-treesitter/nvim-treesitter",
+  opts = function(_, opts)
+    opts.ensure_installed = require("astrocore").list_insert_unique(
+      opts.ensure_installed,
+      { "lua", "vim", "vimdoc", "typescript", "javascript", "tsx", "json", "go", "gomod" }
+    )
+  end,
 }
